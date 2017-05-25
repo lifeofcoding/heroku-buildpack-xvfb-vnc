@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+# bin/compile <build-dir> <cache-dir>
+
+# fail fast
+set -e
+
+# debug
+set -x
+
+# parse and derive params
+BUILD_DIR=$1
+CACHE_DIR=$2
+ENV_DIR=$3
+
+LP_DIR=`cd $(dirname $0); cd ..; pwd`
+
+function error() {
+  echo " !     $*" >&2
+}
+
+function topic() {
+  echo "-----> $*"
+}
+
+function indent() {
+  c='s/^/       /'
+  case $(uname) in
+    Darwin) sed -l "$c";;
+    *)      sed -u "$c";;
+  esac
+}
+
+stack=${STACK:-heroku-16}
+if [ "${stack,,}" != "cedar-14" ]; then
+  error "The Google Chrome Xvfb buildpack is only supported on Cedar-14."
+  error "For more details see:"
+  error "https://devcenter.heroku.com/articles/heroku-ci#known-issues"
+  exit 1
+fi
+
