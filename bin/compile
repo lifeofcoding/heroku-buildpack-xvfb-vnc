@@ -32,7 +32,7 @@ function indent() {
 
 stack=${STACK:-heroku-16}
 if [ "${stack,,}" != "cedar-14" ]; then
-  error "The Google Chrome Xvfb buildpack is only supported on Cedar-14."
+  error "The Xvfb VNC buildpack is only supported on Cedar-14."
   error "For more details see:"
   error "https://devcenter.heroku.com/articles/heroku-ci#known-issues"
   exit 1
@@ -77,6 +77,6 @@ done
 
 topic "Setting up VNC daemon"
 cat <<EOF >$BUILD_DIR/.profile.d/020_vnc.sh
-x11vnc --listen 0.0.0.0 -rfbport 5900 -forever -passwd secret
+x11vnc -bg -nopw -listen localhost -xkb
 EOF
 
