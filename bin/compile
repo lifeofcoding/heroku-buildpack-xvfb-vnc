@@ -30,13 +30,13 @@ function indent() {
   esac
 }
 
-stack=${STACK:-heroku-16}
-if [ "${stack,,}" != "cedar-14" ]; then
-  error "The Xvfb VNC buildpack is only supported on Cedar-14."
-  error "For more details see:"
-  error "https://devcenter.heroku.com/articles/heroku-ci#known-issues"
-  exit 1
-fi
+#stack=${STACK:-heroku-16}
+#if [ "${stack,,}" != "cedar-14" ]; then
+#  error "The Xvfb VNC buildpack is only supported on Cedar-14."
+#  error "For more details see:"
+#  error "https://devcenter.heroku.com/articles/heroku-ci#known-issues"
+#  exit 1
+#fi
 
 
 indent "Installing x11vnc"
